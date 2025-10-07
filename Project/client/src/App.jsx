@@ -1,43 +1,36 @@
-import './App.css';
-import Dashboard from './Dashboard';
-import Login from './Login';
+import { Link, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home.jsx';
+import Register from './pages/Register.jsx';
+import Verify from './pages/Verify.jsx';
+import Login from './pages/Login.jsx';
+import TwoFA from './pages/TwoFA.jsx';
+import Forgot from './pages/Forgot.jsx';
+import Reset from './pages/Reset.jsx';
+import Profile from './pages/Profile.jsx';
+import Admin from './pages/Admin.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-function App() {
-  // const [count, setCount] = useState(0)
-
-
-  function Handler(){}
-
+export default function App() {
   return (
-    <>
-     <Router>
+    <div style={{ fontFamily: 'system-ui', padding: 16 }}>
+      <nav style={{ marginBottom: 16 }}>
+        <Link to="/">Home</Link> | <Link to="/register">Register</Link> | <Link to="/login">Login</Link> | <Link to="/profile">Profile</Link> | <Link to="/admin">Admin</Link>
+      </nav>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/verify" element={<Verify/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/twofa" element={<TwoFA/>} />
+        <Route path="/forgot" element={<Forgot/>} />
+        <Route path="/reset" element={<Reset/>} />
+        <Route path="/profile" element={
+          <ProtectedRoute><Profile/></ProtectedRoute>
+        }/>
+        <Route path="/admin" element={
+          <ProtectedRoute admin><Admin/></ProtectedRoute>
+        }/>
       </Routes>
-    </Router>
-     {/* <Image></Image>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-
-      <UserInfo name='Nasreen Arif' designation='Lecturer'><p>I will teach CS418 course</p></UserInfo>
-      <UserInfo name='Siam' designation='Test'><p>Siam is taking CS418 course in Fall 2025</p></UserInfo>
-      <UserInfo name='Grace' designation='Test2'></UserInfo> */}
-    </>
-  )
+    </div>
+  );
 }
-
-export default App
-
-
